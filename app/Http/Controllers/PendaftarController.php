@@ -146,16 +146,28 @@ class PendaftarController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $santri = Santri::with(['Wali', 'OrangTua', 'programSekolah', 'DokumenSantri'])->findOrFail($id);
+    
+        return view('admin.pendaftar.show', compact('santri'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $pendaftar = Santri::findOrFail($id);
+            $pendaftar->status_pendaftaran = $request->status_pendaftaran; 
+            $pendaftar->save();
+    
+            return response()->json(['success' => true, 'message' => 'Status pendaftaran berhasil diperbarui!']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Terjadi kesalahan!', 'error' => $e->getMessage()], 500);
+        }
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -31,6 +31,7 @@
                                     <th>Tanggal Lahir</th>
                                     <th>No HP</th>
                                         {{-- <th>Email</th> --}}
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -43,6 +44,11 @@
                                     <td>{{ $s->tempat_lahir }}</td>
                                     <td>{{ $s->tanggal_lahir }}</td>
                                     <td>{{ $s->orangTua->nomor_hp_orang_tua }}</td>
+                                    <td>
+                                        <span class="badge {{ $s->status_pendaftaran == 'Pending' ? 'bg-warning' : 'bg-success' }}">
+                                            {{ $s->status_pendaftaran }}
+                                        </span>
+                                    </td>
                                     {{-- <td>{{ $s->orangTua->email !== $s->orangTua->email ? 'Tidak Ada Info Email' : $s->orangTua->email }}</td> --}}
                                     <td>
                                         <a href="{{ route('pendaftar.show', $s->id) }}" class="badge bg-primary"><i class="fas fa-eye"></i></a>
