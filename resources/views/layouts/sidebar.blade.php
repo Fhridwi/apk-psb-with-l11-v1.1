@@ -57,8 +57,8 @@
                 </li>
 
                 <li class="sidebar-title">Pendaftaran</li>
-                <li class="sidebar-item {{ request()->is('admin/calon-santri*') ? 'active' : '' }}">
-                    <a href="" class="sidebar-link">
+                <li class="sidebar-item {{ request()->is('admin/data-CalonSantri*') ? 'active' : '' }}">
+                    <a href="{{ route('CalonSantri.index') }}" class="sidebar-link">
                         <i class="bi bi-person-check-fill"></i>
                         <span>Calon Santri</span>
                     </a>

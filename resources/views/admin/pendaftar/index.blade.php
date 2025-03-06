@@ -4,8 +4,6 @@
 
 @section('content')
 
-
-
 <section class="section">
     <div class="row" id="table-striped">
         <div class="col-12">
@@ -19,7 +17,28 @@
                         <a href="#" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> Export PDF</a>
                     </div>
                 </div>
-                <div class="card-content">
+
+                <div class="card-body">
+                    {{-- Form Search dan Filter --}}
+                    <form action="{{ route('pendaftar.index') }}" method="GET" class="row mb-3">
+                        <div class="col-md-4">
+                            <input type="text" name="search" class="form-control" placeholder="Cari Nama / No Registrasi" value="{{ request('search') }}">
+                        </div>
+                        <div class="col-md-3">
+                            <select name="status" class="form-control">
+                                <option value="">-- Filter Status --</option>
+                                <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="Memverifikasi" {{ request('status') == 'Memverifikasi' ? 'selected' : '' }}>Memverifikasi</option>
+                                <option value="Diterima" {{ request('status') == 'Diterima' ? 'selected' : '' }}>Diterima</option>
+                                <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Cari</button>
+                            <a href="{{ route('pendaftar.index') }}" class="btn btn-secondary"><i class="fas fa-sync"></i> Reset</a>
+                        </div>
+                    </form>
+
                     <div class="table-responsive">
                         <table class="table table-striped mb-0">
                             <thead>
@@ -30,7 +49,6 @@
                                     <th>Tempat Lahir</th>
                                     <th>Tanggal Lahir</th>
                                     <th>No HP</th>
-                                        {{-- <th>Email</th> --}}
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -45,11 +63,13 @@
                                     <td>{{ $s->tanggal_lahir }}</td>
                                     <td>{{ $s->orangTua->nomor_hp_orang_tua }}</td>
                                     <td>
-                                        <span class="badge {{ $s->status_pendaftaran == 'Pending' ? 'bg-warning' : 'bg-success' }}">
+                                        <span class="badge 
+                                            {{ $s->status_pendaftaran == 'Pending' ? 'bg-warning' : 
+                                               ($s->status_pendaftaran == 'Memverifikasi' ? 'bg-primary' : 
+                                               ($s->status_pendaftaran == 'Diterima' ? 'bg-success' : 'bg-danger')) }}">
                                             {{ $s->status_pendaftaran }}
                                         </span>
                                     </td>
-                                    {{-- <td>{{ $s->orangTua->email !== $s->orangTua->email ? 'Tidak Ada Info Email' : $s->orangTua->email }}</td> --}}
                                     <td>
                                         <a href="{{ route('pendaftar.show', $s->id) }}" class="badge bg-primary"><i class="fas fa-eye"></i></a>
                                         <a href="#" class="badge bg-warning"><i class="fas fa-edit"></i></a>
@@ -57,16 +77,21 @@
                                     </td>
                                 </tr>
                                 @empty
-                                <p class="text-danger text-center">Tidak Ada Data Pendaftar</p>
-                                    
+                                <tr>
+                                    <td colspan="8" class="text-danger text-center">Tidak Ada Data Pendaftar</td>
+                                </tr>
                                 @endforelse
-                
                             </tbody>
                         </table>
+                    </div>
+
+                    <div class="mt-3">
+                        {{ $santri->links() }} 
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 @endsection

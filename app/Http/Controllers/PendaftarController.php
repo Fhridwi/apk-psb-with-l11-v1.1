@@ -16,12 +16,26 @@ class PendaftarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $santri = Santri::with('programSekolah', 'wali', 'orangTua', 'dokumenSantri')->get();
-    
-        return view('admin.pendaftar.index', compact('santri'));
+    public function index(Request $request)
+{
+    $query = Santri::query();
+
+    // Pencarian berdasarkan nama lengkap atau nomor registrasi
+    if ($request->has('search') && !empty($request->search)) {
+        $query->where('nama_lengkap', 'LIKE', '%' . $request->search . '%')
+              ->orWhere('no_pendaftaran', 'LIKE', '%' . $request->search . '%');
     }
+
+    // Filter status
+    if ($request->has('status') && !empty($request->status)) {
+        $query->where('status_pendaftaran', $request->status);
+    }
+
+    $santri = $query->paginate(10); 
+
+    return view('admin.pendaftar.index', compact('santri'));
+}
+
     
 
     public function create()

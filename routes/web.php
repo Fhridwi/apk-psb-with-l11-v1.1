@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CalonSantriController;
 use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SekolahController;
@@ -12,15 +13,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
-Route::prefix('/admin')->middleware(['auth'])->group(function () {
 
+Route::prefix('/admin')->middleware(['auth'])->group(function () {
+    
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin');
-
+    
     //Tahun Ajaran
     Route::get('/tahun-ajaran', [TahunAjaranController::class, 'index'])->name('tahun.index');
     Route::get('/tambah-tahun-ajaran', [TahunAjaranController::class, 'create'])->name('tahun.create');
@@ -49,5 +50,19 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::get('/data-pendaftar/{id}', [PendaftarController::class, 'edit'])->name('pendaftar.edit');
     Route::get('/data-pendaftar/{id}/show', [PendaftarController::class, 'show'])->name('pendaftar.show');
     Route::put('/data-pendaftar/{id}', [PendaftarController::class, 'update'])->name('pendaftar.update');
-    Route::delete('/data-pendaftar/{id}', [PendaftarController::class, 'destroy'])->name('pendaftar.delete');
+    Route::delete('/data-pendaftar/{id}', [PendaftarController::class, 'destroy'])->name('pendaftar.delete'); 
+    // Calon Santri
+    Route::get('/data-CalonSantri', [CalonSantriController::class, 'index'])->name('CalonSantri.index');
+    Route::get('/tambah-data-CalonSantri', [CalonSantriController::class, 'create'])->name('CalonSantri.create');
+    Route::post('/data-CalonSantri', [CalonSantriController::class, 'store'])->name('CalonSantri.store');
+    Route::get('/data-CalonSantri/{id}', [CalonSantriController::class, 'edit'])->name('CalonSantri.edit');
+    Route::put('/data-CalonSantri/{id}', [CalonSantriController::class, 'update'])->name('CalonSantri.update');
+    Route::delete('/data-CalonSantri/{id}', [CalonSantriController::class, 'destroy'])->name('CalonSantri.delete');
+   
+   
+   
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+    
 });

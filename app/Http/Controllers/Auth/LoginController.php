@@ -49,6 +49,6 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         session()->flash('success', 'Anda telah keluar.');
-        return redirect('/login');
+        return redirect('login');
     }
 }
