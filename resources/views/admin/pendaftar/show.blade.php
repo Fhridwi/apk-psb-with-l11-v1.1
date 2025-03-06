@@ -60,7 +60,7 @@
                     <tr>
                         <th>Jenis Kelamin</th>
                         <td>
-                            @if($santri->jenis_kelamin == 'L')
+                            @if($santri->jenis_kelamin == 'Laki-laki')
                                 <span class="badge bg-info">Laki-laki</span>
                             @else
                                 <span class="badge bg-info">Perempuan</span>

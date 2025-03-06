@@ -14,9 +14,6 @@
                     <div class="card-body">
                         <form action="{{ route('pendaftar.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-
-
-
                             <!-- DATA SANTRI -->
                             <h5 class="mt-3">Data Santri</h5>
                             <div class="row">
@@ -53,6 +50,7 @@
                                     <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                     <select name="jenis_kelamin"
                                         class="form-control @error('jenis_kelamin') is-invalid @enderror" required>
+                                        <option value="">- Jenis Kelamin-</option>
                                         <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
                                             Laki-laki</option>
                                         <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
@@ -99,6 +97,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-6">
                                     <label for="sekolah" class="form-label">Sekolah</label>
                                     <select name="sekolah" class="form-control @error('sekolah') is-invalid @enderror"
@@ -112,9 +111,17 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+                                <div class="col-md-6">
+                                    <label for="tahun_ajaran" class="form-label">Tahun Ajaran</label>
+                                    <select name="tahun_ajaran" id="tahun_ajaran" class="form-control @error('tahun_ajaran') @enderror" required>
+                                        <option value="">Tahun Ajaran</option>
+                                        @foreach ($tahunAjaran as $t)
+                                            <option value="{{ $t->id }}">{{ $t->tahun }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-
-
                             <!-- DATA ORANG TUA -->
                             <h5 class="mt-4">Data Orang Tua</h5>
                             <div class="row">
@@ -243,8 +250,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-
                             <!-- DATA WALI (Optional) -->
                             <h5 class="mt-4">Data Wali (Jika Ada)</h5>
                             <div class="row">
@@ -341,8 +346,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-
                             <!-- UPLOAD DOKUMEN -->
                             <h5 class="mt-4">Dokumen Santri</h5>
                             <div class="row">
@@ -381,9 +384,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-
-
+                            </div> 
                             <button type="submit" class="btn btn-primary mt-4">Simpan</button>
                             <a href="{{ route('pendaftar.index') }}" class="btn btn-secondary mt-4">Kembali</a>
                         </form>
@@ -392,7 +393,6 @@
             </div>
         </div>
     </section>
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const hubunganWali = document.getElementById("hubungan_wali");
@@ -405,7 +405,6 @@
                     waliFields.forEach(field => field.style.display = "block");
                 }
             }
-
             hubunganWali.addEventListener("change", toggleFields);
             toggleFields();
         });

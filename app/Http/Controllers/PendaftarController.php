@@ -8,6 +8,7 @@ use App\Models\Program;
 use App\Models\ProgramSekolah;
 use App\Models\Santri;
 use App\Models\Sekolah;
+use App\Models\TahunAjaran;
 use App\Models\Wali;
 use Illuminate\Http\Request;
 
@@ -41,12 +42,13 @@ class PendaftarController extends Controller
     public function create()
     {
         $programs = Program::all();
+        $tahunAjaran = TahunAjaran::where('status', 'dibuka')->get();
         $sekolahs = Sekolah::all();
         $lastSantri = Santri::latest('id')->first();
         $newNumber = $lastSantri ? ((int)substr($lastSantri->no_pendaftaran, -5) + 1) : 1;
         $no_pendaftaran = 'PSB-2025' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
 
-        return view('admin.pendaftar.create', compact('programs', 'sekolahs', 'no_pendaftaran'));
+        return view('admin.pendaftar.create', compact('programs', 'sekolahs', 'no_pendaftaran', 'tahunAjaran'));
     }
 
     /**
@@ -147,6 +149,7 @@ class PendaftarController extends Controller
                 'asal_sekolah' => $request->asal_sekolah,
                 'alamat' => $request->alamat,
                 'program_sekolah_id' => $programSekolah->id,
+                'tahun_id'  => $request->tahun_ajaran,
                 'orang_tua_id' => $orangTua->id,
                 'wali_id' => $wali ? $wali->id : null,
                 'dokumen_santri_id' => $dokumen->id

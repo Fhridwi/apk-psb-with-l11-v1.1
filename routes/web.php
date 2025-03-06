@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalonSantriController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,11 +18,20 @@ Route::middleware(['guest'])->group(function () {
 });
 
 
+// Route Santri
+Route::get('/', [UserController::class, 'index'])->name('home');
+Route::get('/daftar-santri', [UserController::class, 'create'])->name('daftar');
+Route::post('/daftar-santri-submit', [UserController::class, 'store'])->name('submit.store');
+
+
+
+
+//Route Admin
+
+
 Route::prefix('/admin')->middleware(['auth'])->group(function () {
     
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('admin');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin');
     
     //Tahun Ajaran
     Route::get('/tahun-ajaran', [TahunAjaranController::class, 'index'])->name('tahun.index');

@@ -26,6 +26,7 @@ class Santri extends Model
         'program_sekolah_id',
         'orang_tua_id',
         'wali_id',
+        'tahun_id',
         'dokumen_santri_id',
         'status_pendaftaran',
     ];
@@ -51,6 +52,10 @@ class Santri extends Model
     public function wali()
     {
         return $this->belongsTo(Wali::class);
+    }
+    public function tahunAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class);
     }
 
     public function dokumenSantri()

@@ -14,22 +14,14 @@
 
                 <div class="card-body">
                     {{-- Form Search dan Filter --}}
-                    <form action="{{ url('/calon-santri') }}" method="GET" class="row mb-3">
+                    <form action="{{ url('admin/data-CalonSantri') }}" method="GET" class="row mb-3">
                         <div class="col-md-4">
                             <input type="text" name="search" class="form-control" placeholder="Cari Nama / No Registrasi" value="{{ request('search') }}">
                         </div>
-                        <div class="col-md-3">
-                            <select name="status" class="form-control">
-                                <option value="">-- Filter Status --</option>
-                                <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="Memverifikasi" {{ request('status') == 'Memverifikasi' ? 'selected' : '' }}>Memverifikasi</option>
-                                <option value="Diterima" {{ request('status') == 'Diterima' ? 'selected' : '' }}>Diterima</option>
-                                <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
-                            </select>
-                        </div>
+
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Cari</button>
-                            <a href="{{ url('/calon-santri') }}" class="btn btn-secondary"><i class="fas fa-sync"></i> Reset</a>
+                            <a href="{{ url('admin/data-CalonSantri') }}" class="btn btn-secondary"><i class="fas fa-sync"></i> Reset</a>
                         </div>
                     </form>
 
