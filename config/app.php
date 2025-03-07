@@ -125,7 +125,12 @@ return [
 
     'aliases' => [
     'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+    'Pdf' => Barryvdh\DomPDF\Facade\Pdf::class,
     ],
+
+    'settings' => [
+    'locale' => 'id'
+]
 
 
 ];

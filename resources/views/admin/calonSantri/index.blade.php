@@ -63,7 +63,7 @@
                                     </td>
                                     <td>
                                         {{-- Bukti Pendaftaran --}}
-                                        <a href="{{ url('/bukti-pendaftaran/'.$s->id) }}" class="badge bg-info" title="Lihat Bukti Pendaftaran">
+                                        <a href="{{ route('bukti.psb', $s->id) }}" target="_blank" class="badge bg-info" title="Lihat Bukti Pendaftaran">
                                             <i class="fas fa-file-alt"></i> Bukti
                                         </a>
                                     

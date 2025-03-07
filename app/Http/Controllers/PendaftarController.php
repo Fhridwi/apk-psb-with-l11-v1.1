@@ -44,9 +44,10 @@ class PendaftarController extends Controller
         $programs = Program::all();
         $tahunAjaran = TahunAjaran::where('status', 'dibuka')->get();
         $sekolahs = Sekolah::all();
-        $lastSantri = Santri::latest('id')->first();
-        $newNumber = $lastSantri ? ((int)substr($lastSantri->no_pendaftaran, -5) + 1) : 1;
-        $no_pendaftaran = 'PSB-2025' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
+         // Generate No Pendaftaran M]
+         $year = date('Y'); 
+         $randomNumber = mt_rand(10000, 99999); 
+         $no_pendaftaran = 'PSB-' . $year . $randomNumber;
 
         return view('admin.pendaftar.create', compact('programs', 'sekolahs', 'no_pendaftaran', 'tahunAjaran'));
     }

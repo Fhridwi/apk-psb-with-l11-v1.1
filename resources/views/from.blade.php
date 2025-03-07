@@ -85,38 +85,59 @@
                         <div class="flex flex-col">
                             <label class="mb-2">Nama Lengkap</label>
                             <input type="text" class="border p-2 rounded-lg" name="nama_lengkap"
-                                placeholder="Masukkan nama lengkap">
+                                placeholder="Masukkan nama lengkap" required>
+                                @error('nama_lengkap')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="flex flex-col">
                             <label for="tempat_lahir" class="mb-2">Tempat Lahir</label>
                             <input type="text" name="tempat_lahir" id="tempat_lahir" placeholder="Tempat Lahir"
-                                class="border p-2 rounded-lg">
+                                class="border p-2 rounded-lg" required>
+                                @error('tempat_lahir')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Tanggal Lahir</label>
-                            <input type="date" class="border p-2 rounded-lg" name="tanggal_lahir">
+                            <input type="date" class="border p-2 rounded-lg" name="tanggal_lahir" required>
+                            @error('tanggal_lahir')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Jenis Kelamin</label>
-                            <select class="border p-2 rounded-lg" name="jenis_kelamin">
-                                <option value="L">Laki-laki</option>
-                                <option value="P">Perempuan</option>
+                            <select class="border p-2 rounded-lg" name="jenis_kelamin" required>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
+                            @error('jenis_kelamin')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="flex flex-col">
                             <label for="anak_ke" class="mb-2">Anak Ke</label>
                             <input type="text" name="anak_ke" id="anak_ke" class="border p-2 rounded-lg"
-                                placeholder="Anak Ke">
+                                placeholder="Anak Ke" required>
+                                @error('anak_ke')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="flex flex-col">
                             <label for="asal_sekolah" class="mb-2">Asal Sekolah</label>
                             <input type="text" name="asal_sekolah" id="asal_sekolah" placeholder="Asal Sekolah"
-                                class="border p-2 rounded-lg">
+                                class="border p-2 rounded-lg" required>
+                                @error('asal_sekolah')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Alamat</label>
                             <input type="text" class="border p-2 rounded-lg" placeholder="Masukkan alamat"
-                                name="alamat">
+                                name="alamat" required>
+                                @error('alamat')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
             </div>
@@ -131,30 +152,39 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="flex flex-col">
                             <label class="mb-2">Pilih Program</label>
-                            <select class="border p-2 rounded-lg" name="program">
+                            <select class="border p-2 rounded-lg" name="program" required>
                                 <option value=""> -- Pilih Program -- </option>
                                 @foreach ($program as $p)
-                                    <option value="{{ $p->id }}">{{ $p->program }}</option>
+                                    <option value="{{ $p->program }}">{{ $p->program }}</option>
                                 @endforeach
                             </select>
+                            @error('program')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Pilih Sekolah</label>
-                            <select class="border p-2 rounded-lg" name="sekolah">
+                            <select class="border p-2 rounded-lg" name="sekolah" required>
                                 <option value="">-- Pilih Sekolah --</option>
                                 @foreach ($sekolah as $s)
-                                    <option value="{{ $s->id }}">{{ $s->sekolah }}</option>
+                                    <option value="{{ $s->sekolah }}">{{ $s->sekolah }}</option>
                                 @endforeach
                             </select>
+                            @error('sekolah')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Pilih Tahun Ajaran</label>
-                            <select class="border p-2 rounded-lg" name="tahun_ajaran_id">
+                            <select class="border p-2 rounded-lg" name="tahun_ajaran" required>
                                 <option value="">-- Pilih Tahun Ajaran --</option>
                                 @foreach ($tahunAjaran as $t)
                                     <option value="{{ $t->id }}">{{ $t->tahun }}</option>
                                 @endforeach
                             </select>
+                            @error('tahun_ajaran')
+                            <div class="text-red-500 text-sm">{{ $message }}</div>
+                        @enderror
                         </div>
                     </div>
             </div>
@@ -170,26 +200,26 @@
                         <div class="flex flex-col">
                             <label class="mb-2">Nama Ayah</label>
                             <input type="text" class="border p-2 rounded-lg" name="nama_ayah"
-                                placeholder="Masukkan nama ayah">
+                                placeholder="Masukkan nama ayah" required> 
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Nama Ibu</label>
                             <input type="text" class="border p-2 rounded-lg" name="nama_ibu"
-                                placeholder="Masukkan nama ibu">
+                                placeholder="Masukkan nama ibu" required>
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Pekerjaan Ayah</label>
                             <input type="text" class="border p-2 rounded-lg" name="pekerjaan_ayah"
-                                placeholder="Masukkan pekerjaan ayah">
+                                placeholder="Masukkan pekerjaan ayah" required>
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Pekerjaan Ibu</label>
                             <input type="text" class="border p-2 rounded-lg" name="pekerjaan_ibu"
-                                placeholder="Masukkan pekerjaan ibu">
+                                placeholder="Masukkan pekerjaan ibu" required>
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Penghasilan Ayah</label>
-                            <select class="border p-2 rounded-lg" name="penghasilan_ayah">
+                            <select class="border p-2 rounded-lg" name="penghasilan_ayah" required>
                                 <option value="">-- Pilih Penghasilan Ayah --</option>
                                 <option value="0">Tidak Bekerja</option>
                                 <option value="1000000">Rp.1.000.000 - Rp.2.000.000</option>
@@ -201,7 +231,7 @@
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Penghasilan Ibu</label>
-                            <select class="border p-2 rounded-lg" name="penghasilan_ibu">
+                            <select class="border p-2 rounded-lg" name="penghasilan_ibu" required>
                                 <option value="">-- Pilih Penghasilan Ibu --</option>
                                 <option value="0">Tidak Bekerja</option>
                                 <option value="1000000">Rp.1.000.000 - Rp.2.000.000</option>
@@ -213,7 +243,7 @@
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Status Ayah</label>
-                            <select class="border p-2 rounded-lg" name="status_ayah">
+                            <select class="border p-2 rounded-lg" name="status_ayah" required>
                                 <option value="">-- Pilih Status Ayah --</option>
                                 <option value="hidup">Hidup</option>
                                 <option value="meninggal">Meninggal</option>
@@ -221,7 +251,7 @@
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Status Ibu</label>
-                            <select class="border p-2 rounded-lg" name="status_ibu">
+                            <select class="border p-2 rounded-lg" name="status_ibu" required>
                                 <option value="">-- Pilih Status Ibu --</option>
                                 <option value="hidup">Hidup</option>
                                 <option value="meninggal">Meninggal</option>
@@ -230,12 +260,12 @@
                         <div class="flex flex-col">
                             <label class="mb-2">Alamat Orang Tua</label>
                             <textarea class="border p-2 rounded-lg" name="alamat_orang_tua" rows="2"
-                                placeholder="Alamat Orang Tua"></textarea>
+                                placeholder="Alamat Orang Tua" required></textarea>
                         </div>
                         <div class="flex flex-col">
                             <label class="mb-2">No HP Orang Tua</label>
-                            <input type="text" class="border p-2 rounded-lg" name="no_hp_orang_tua"
-                                placeholder="Masukkan nomor HP">
+                            <input type="number" class="border p-2 rounded-lg" name="nomor_hp_orang_tua"
+                                placeholder="Masukkan nomor HP" required>
                         </div>
                     </div>
             </div>
@@ -331,30 +361,30 @@
             <div class="bg-white p-6 rounded-lg shadow-md mb-6">
                 <div class="flex items-center mb-4">
                     <i class="fas fa-file-alt text-2xl text-green-600 mr-3"></i>
-                    <h3 class="text-xl font-semibold">Dokumen Pendukung</h3>
+                    <h3 class="text-xl font-semibold" required >Dokumen Pendukung</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="flex flex-col">
                             <label class="mb-2">Upload Pas Foto</label>
-                            <input type="file" name="scan_foto" class="border p-2 rounded-lg">
-                            @error('scan_foto')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                            <input type="file" name="scan_foto" class="border p-2 rounded-lg" required>
+                            @error('scan_foto')<span class="text-red-500 text-sm" >{{ $message }}</span>@enderror
                         </div>
                     
                         <div class="flex flex-col">
                             <label class="mb-2">Upload Kartu Keluarga</label>
-                            <input type="file" name="scan_kk" class="border p-2 rounded-lg">
+                            <input type="file" name="scan_kk" class="border p-2 rounded-lg" required>
                             @error('scan_kk')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                         </div>
                        
                         <div class="flex flex-col">
                             <label class="mb-2">Upload KTP Ayah</label>
-                            <input type="file" name="scan_ktp_ayah" class="border p-2 rounded-lg">
+                            <input type="file" name="scan_ktp_ayah" class="border p-2 rounded-lg" required>
                             @error('scan_ktp_ayah')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="flex flex-col">
                             <label class="mb-2">Upload KTP Ibu</label>
-                            <input type="file" name="scan_ktp_ibu" class="border p-2 rounded-lg">
+                            <input type="file" name="scan_ktp_ibu" class="border p-2 rounded-lg" required>
                             @error('scan_ktp_ibu')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -376,8 +406,7 @@
             <!-- Tombol Submit -->
             <div class="flex justify-end">
                 <button id="submit-btn"
-                class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition opacity-50 cursor-not-allowed"
-                disabled>
+                class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition opacity-50 cursor-not-allowed">
                     Submit
                 </button>
             </div>

@@ -22,7 +22,9 @@ Route::middleware(['guest'])->group(function () {
 Route::get('/', [UserController::class, 'index'])->name('home');
 Route::get('/daftar-santri', [UserController::class, 'create'])->name('daftar');
 Route::post('/daftar-santri-submit', [UserController::class, 'store'])->name('submit.store');
-
+ //export bukti psb
+Route::get('/data-CalonSantri/{id}/export-add', [CalonSantriController::class, 'exportPDF'])->name('bukti.psb');
+   
 
 
 
