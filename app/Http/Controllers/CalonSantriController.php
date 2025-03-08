@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SantriExport;
 use App\Models\Santri;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CalonSantriController extends Controller
 {
@@ -36,6 +38,11 @@ class CalonSantriController extends Controller
         $filename = 'Bukti-' . $santri->no_pendaftaran . '.pdf';
         // return $pdf->download($filename);
         return $pdf->stream($filename);
+    }
+
+    public function exportSantri()
+    {
+        return Excel::download(new SantriExport, 'data_santri.xlsx');
     }
     
     

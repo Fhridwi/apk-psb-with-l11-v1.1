@@ -16,6 +16,7 @@
 </head>
 
 <body class="bg-gray-100">
+
     <header class="shadow fixed -top-1 left-0 w-full z-50 bg-white">
         <nav class="container mx-auto flex items-center justify-between py-4 px-4">
             <!-- Logo -->

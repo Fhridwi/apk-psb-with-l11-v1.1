@@ -141,7 +141,7 @@ class UserController extends Controller
             'dokumen_santri_id' => $dokumen->id
         ]);
 
-        return redirect()->route('berhasil')->with('success', 'Selamattt! Anda Berhasil Mendaftar!!');
+        return redirect()->route('home')->with('success', 'Selamattt! Anda Berhasil Mendaftar!!');
     }
 
     /**

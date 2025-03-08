@@ -11,7 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -35,6 +35,51 @@
 </style>
 
 <body class="bg-gray-100" data-aos-easing="ease-in-out" data-aos-duration="600">
+
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 2000
+        });
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: "{{ session('error') }}",
+            showConfirmButton: true
+        });
+    </script>
+@endif
+
+@if (session('warning'))
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Peringatan!',
+            text: "{{ session('warning') }}",
+            showConfirmButton: true
+        });
+    </script>
+@endif
+
+@if (session('info'))
+    <script>
+        Swal.fire({
+            icon: 'info',
+            title: 'Informasi!',
+            text: "{{ session('info') }}",
+            showConfirmButton: true
+        });
+    </script>
+@endif
 
     <header class="shadow fixed -top-1 left-0 w-full z-50 bg-white">
         <nav class="container mx-auto flex items-center justify-between py-4 px-4">

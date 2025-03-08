@@ -24,7 +24,7 @@ Route::get('/daftar-santri', [UserController::class, 'create'])->name('daftar');
 Route::post('/daftar-santri-submit', [UserController::class, 'store'])->name('submit.store');
  //export bukti psb
 Route::get('/data-CalonSantri/{id}/export-add', [CalonSantriController::class, 'exportPDF'])->name('bukti.psb');
-   
+  
 
 
 
@@ -71,7 +71,8 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::get('/data-CalonSantri/{id}', [CalonSantriController::class, 'edit'])->name('CalonSantri.edit');
     Route::put('/data-CalonSantri/{id}', [CalonSantriController::class, 'update'])->name('CalonSantri.update');
     Route::delete('/data-CalonSantri/{id}', [CalonSantriController::class, 'destroy'])->name('CalonSantri.delete');
-   
+    //export xls
+    Route::get('/santri/export', [CalonSantriController::class, 'exportSantri'])->name('santri.export');
    
    
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
