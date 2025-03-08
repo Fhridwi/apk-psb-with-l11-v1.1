@@ -38,6 +38,19 @@
                                         @enderror
                                     </div>
 
+                                    <!-- Tanggal Selesai -->
+<div class="col-md-4">
+    <label for="tanggal_selesai">Tanggal Selesai</label>
+</div>
+<div class="col-md-8 form-group">
+    <input type="date" id="tanggal_selesai" class="form-control @error('tanggal_selesai') is-invalid @enderror" 
+        name="tanggal_selesai" value="{{ old('tanggal_selesai') }}" required>
+    @error('tanggal_selesai')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
+
+
                                     <!-- Status -->
                                     <div class="col-md-4">
                                         <label for="status">Status</label>

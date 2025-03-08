@@ -33,8 +33,19 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             session()->flash('success', 'Selamat datang, ' . Auth::user()->name);
-            return redirect()->intended('/admin/dashboard'); 
+        
+            // Arahkan berdasarkan role pengguna
+            switch (Auth::user()->role) {
+                case 'admin':
+                    return redirect()->intended('/admin/dashboard');
+                case 'wali':
+                    return redirect()->intended('/20192506/dashboard');
+                default:
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'Role tidak dikenali.');
+            }
         }
+        
 
         // Jika gagal, tampilkan error
         session()->flash('error', 'Email atau password salah.');

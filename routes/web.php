@@ -8,30 +8,24 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Wali\WaliController;
+use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/', function() {
+  return view('home');
+});
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
 });
 
-
-// Route Santri
-Route::get('/', [UserController::class, 'index'])->name('home');
-Route::get('/daftar-santri', [UserController::class, 'create'])->name('daftar');
-Route::post('/daftar-santri-submit', [UserController::class, 'store'])->name('submit.store');
- //export bukti psb
-Route::get('/data-CalonSantri/{id}/export-add', [CalonSantriController::class, 'exportPDF'])->name('bukti.psb');
-  
-
-
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //Route Admin
-
-
-Route::prefix('/admin')->middleware(['auth'])->group(function () {
+Route::prefix('/admin')->middleware(['auth',  'role:admin'])->group(function () {
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin');
     
@@ -73,10 +67,21 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::delete('/data-CalonSantri/{id}', [CalonSantriController::class, 'destroy'])->name('CalonSantri.delete');
     //export xls
     Route::get('/santri/export', [CalonSantriController::class, 'exportSantri'])->name('santri.export');
+    Route::get('/data-CalonSantri/{id}/export-add', [CalonSantriController::class, 'exportPDF'])->name('bukti.psb');
+
    
-   
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-    
+});
+
+
+
+
+// Route Wali 
+Route::prefix('20192506')->middleware(['auth', 'role:wali'])->group(function() {
+    Route::get('/dashboard', [WaliController::class, 'index'])->name('wali.dashboard');
+
+    //daftar santri
+    Route::get('/daftar', [WaliController::class, 'create'])->name('daftar.create');
+    Route::post('/daftar', [WaliController::class, 'store'])->name('daftar.store');
 });

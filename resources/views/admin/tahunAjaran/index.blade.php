@@ -20,6 +20,7 @@
                                         <th>NO</th>
                                         <th>TAHUN</th>
                                         <th>KUOTA</th>
+                                        <th>Tanggal Selesai</th>
                                         <th>STATUS</th>
                                         <th>AKSI</th>
                                     </tr>
@@ -30,6 +31,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $tahun->tahun }}</td>
                                             <td>{{ $tahun->kuota }}</td>
+                                            <td>{{ $tahun->tanggal_selesai }}</td>
                                             <td>
                                                 <span class="badge {{ $tahun->status == 'dibuka' ? 'bg-success' : 'bg-danger' }}">
                                                     {{ $tahun->status }}

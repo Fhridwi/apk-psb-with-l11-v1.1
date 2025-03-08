@@ -42,6 +42,8 @@ class TahunAjaranController extends Controller
             'tahun'  => $request->tahun,
             'kuota'  => $request->kuota,
             'status' => $request->status,
+            'tanggal_selesai'   => $request->tanggal_selesai,
+
         ]);
 
         return redirect()->route('tahun.index')->with('success', 'Tahun Ajaran berhasil ditambahkan.');
@@ -71,6 +73,7 @@ class TahunAjaranController extends Controller
         $tahunAjaran->update([
             'tahun'  => $request->tahun,
             'kuota'  => $request->kuota,
+            'tanggal_selesai'   => $request->tanggal_selesai,
             'status' => $request->status
         ]);
 

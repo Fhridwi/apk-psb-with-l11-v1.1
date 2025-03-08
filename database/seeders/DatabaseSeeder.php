@@ -18,16 +18,26 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('12121212'),
+            'role'    => 'admin'
+        ]);
+
+        // Membuat Wali Santri
+        User::create([
+            'name' => 'Wali Santri',
+            'email' => 'wali@santri.com',
+            'password' => Hash::make('12121212'),
+            'role' => 'wali'
         ]);
 
         $tahunAjaran = [
-            ['tahun' => '2021/2022', 'status' => 'ditutup', 'kuota' => '112'],
-            ['tahun' => '2022/2023', 'status' => 'ditutup', 'kuota' => '112'],
-            ['tahun' => '2023/2024', 'status' => 'ditutup', 'kuota' => '112'],
-            ['tahun' => '2024/2025', 'status' => 'ditutup', 'kuota' => '112'],
-            ['tahun' => '2025/2026', 'status' => 'dibuka' , 'kuota' => '112'],
+            ['tahun' => '2021/2022', 'status' => 'ditutup', 'kuota' => 112, 'tanggal_selesai' => '2021-08-30'],
+            ['tahun' => '2022/2023', 'status' => 'ditutup', 'kuota' => 112, 'tanggal_selesai' => '2022-08-30'],
+            ['tahun' => '2023/2024', 'status' => 'ditutup', 'kuota' => 112, 'tanggal_selesai' => '2023-08-30'],
+            ['tahun' => '2024/2025', 'status' => 'ditutup', 'kuota' => 112, 'tanggal_selesai' => '2024-08-30'],
+            ['tahun' => '2025/2026', 'status' => 'dibuka', 'kuota' => 112, 'tanggal_selesai' => '2025-08-30'],
         ];
+        
 
         foreach ($tahunAjaran as $tahun) {
             TahunAjaran::create($tahun);

@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function santri()
+{
+    return $this->hasMany(Santri::class, 'akun_id');
+}
+
 }

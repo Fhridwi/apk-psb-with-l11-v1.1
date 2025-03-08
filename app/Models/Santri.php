@@ -29,6 +29,7 @@ class Santri extends Model
         'tahun_id',
         'dokumen_santri_id',
         'status_pendaftaran',
+        'akun_id'
     ];
 
     protected static function boot()
@@ -62,5 +63,11 @@ class Santri extends Model
     {
         return $this->belongsTo(DokumenSantri::class);
     }
+
+    public function akun()
+{
+    return $this->belongsTo(User::class, 'akun_id');
+}
+
 }
 

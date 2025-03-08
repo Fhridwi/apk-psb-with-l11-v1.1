@@ -4,11 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('santri', function (Blueprint $table) {
@@ -26,16 +22,15 @@ return new class extends Migration
             $table->foreignId('tahun_id')->constrained('tahun_ajaran')->onDelete('cascade');
             $table->foreignId('wali_id')->nullable()->constrained('wali')->onDelete('set null');
             $table->foreignId('dokumen_santri_id')->constrained('dokumen_santri')->onDelete('cascade');
+            $table->foreignId('akun_id')->constrained('users')->onDelete('cascade'); // Menambahkan akun_id
             $table->enum('status_pendaftaran', ['Pending', 'Diverifikasi', 'Diterima', 'Ditolak'])->default('Pending');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('santri');
     }
 };
+

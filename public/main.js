@@ -66,4 +66,5 @@ function handleScroll() {
 window.addEventListener('scroll', handleScroll);
 window.addEventListener('DOMContentLoaded', handleScroll); 
 
+// Waktu Dafatr 
 
