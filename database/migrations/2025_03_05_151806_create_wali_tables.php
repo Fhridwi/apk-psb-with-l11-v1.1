@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('penghasilan_wali', 10, 2);
             $table->text('alamat_wali');
             $table->string('nomor_hp_wali', 15);
+            $table->string('email_wali', 100);
             $table->timestamps();
         });
 

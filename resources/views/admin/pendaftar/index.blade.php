@@ -70,11 +70,24 @@
                                             {{ $s->status_pendaftaran }}
                                         </span>
                                     </td>
-                                    <td>
-                                        <a href="{{ route('pendaftar.show', $s->id) }}" class="badge bg-primary"><i class="fas fa-eye"></i></a>
-                                        <a href="#" class="badge bg-warning"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="badge bg-danger"><i class="fas fa-trash"></i></a>
+                                    <td class="d-flex gap-1">
+                                        <a href="{{ route('pendaftar.show', $s->id) }}" class="badge bg-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        
+                                        <a href="#" class="badge bg-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    
+                                        <form action="{{ route('pendaftar.delete', $s->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus santri ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="badge bg-danger border-0">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
+                                    
                                 </tr>
                                 @empty
                                 <tr>

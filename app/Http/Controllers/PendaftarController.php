@@ -11,6 +11,7 @@ use App\Models\Sekolah;
 use App\Models\TahunAjaran;
 use App\Models\Wali;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PendaftarController extends Controller
 {
@@ -106,7 +107,8 @@ class PendaftarController extends Controller
                 'status_ayah' => $request->status_ayah,
                 'status_ibu' => $request->status_ibu,
                 'alamat_orang_tua' => $request->alamat_orang_tua,
-                'nomor_hp_orang_tua' => $request->nomor_hp_orang_tua
+                'nomor_hp_orang_tua' => $request->nomor_hp_orang_tua,
+                'email_orang_tua' => $request->email_orang_tua
             ]);
     
             // Simpan data wali jika ada
@@ -119,7 +121,8 @@ class PendaftarController extends Controller
                         'pekerjaan_wali' => $request->pekerjaan_wali,
                         'penghasilan_wali' => $request->penghasilan_wali,
                         'alamat_wali' => $request->alamat_wali,
-                        'nomor_hp_wali' => $request->nomor_hp_wali
+                        'nomor_hp_wali' => $request->nomor_hp_wali,
+                        'email_wali' => $request->email_wali
                     ]
                 );
             }
@@ -190,8 +193,26 @@ class PendaftarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    
+    public function destroy($id)
     {
-        //
+        DB::transaction(function () use ($id) {
+            $santri = Santri::findOrFail($id);
+    
+            $santri->dokumenSantri()?->delete();
+    
+            if ($santri->orang_tua_id && !Santri::where('orang_tua_id', $santri->orang_tua_id)->where('id', '!=', $santri->id)->exists()) {
+                $santri->orangTua()?->delete();
+            }
+    
+            if ($santri->wali_id && !Santri::where('wali_id', $santri->wali_id)->where('id', '!=', $santri->id)->exists()) {
+                $santri->wali()?->delete();
+            }
+    
+            $santri->delete();
+        });
+    
+        return redirect()->route('pendaftar.index')->with('success', 'Santri berhasil dihapus.');
     }
+    
 }

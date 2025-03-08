@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->foreignId('program_sekolah_id')->constrained('program_sekolah')->onDelete('cascade');
             $table->foreignId('orang_tua_id')->constrained('orang_tua')->onDelete('cascade');
+            $table->foreignId('tahun_id')->constrained('tahun_ajaran')->onDelete('cascade');
             $table->foreignId('wali_id')->nullable()->constrained('wali')->onDelete('set null');
             $table->foreignId('dokumen_santri_id')->constrained('dokumen_santri')->onDelete('cascade');
             $table->enum('status_pendaftaran', ['Pending', 'Diverifikasi', 'Diterima', 'Ditolak'])->default('Pending');

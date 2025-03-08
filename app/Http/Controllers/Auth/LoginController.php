@@ -33,7 +33,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             session()->flash('success', 'Selamat datang, ' . Auth::user()->name);
-            return redirect()->intended('/admin'); 
+            return redirect()->intended('/admin/dashboard'); 
         }
 
         // Jika gagal, tampilkan error
