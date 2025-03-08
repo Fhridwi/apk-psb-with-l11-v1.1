@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('wali', function (Blueprint $table) {
             $table->id();
-            $table->string('hubungan_wali', 50);
-            $table->string('nama_wali', 100);
-            $table->string('pekerjaan_wali', 100);
-            $table->decimal('penghasilan_wali', 10, 2);
-            $table->text('alamat_wali');
-            $table->string('nomor_hp_wali', 15);
-            $table->string('email_wali', 100);
+            $table->string('hubungan_wali', 50)->nullable();
+            $table->string('nama_wali', 100)->nullable();
+            $table->string('pekerjaan_wali', 100)->nullable();
+            $table->decimal('penghasilan_wali', 10, 2)->nullable();
+            $table->text('alamat_wali')->nullable();
+            $table->string('nomor_hp_wali', 15)->nullable();
+            $table->string('email_wali', 100)->nullable();
             $table->timestamps();
         });
 

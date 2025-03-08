@@ -21,6 +21,7 @@ class OrangTua extends Model
         'status_ibu',
         'alamat_orang_tua',
         'nomor_hp_orang_tua',
+        'email_orang_tua',
     ];
 
     public function santri()

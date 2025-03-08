@@ -41,6 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
 
         $request->validate([
             'no_pendaftaran'    => 'required|unique:santri,no_pendaftaran,',
@@ -64,12 +65,16 @@ class UserController extends Controller
             'status_ibu' => 'required|string',
             'alamat_orang_tua' => 'required|string',
             'nomor_hp_orang_tua' => 'required|string',
+            'email_wali' => 'email',
+            'email_orang_tua' => 'email|nullable',
 
             'scan_foto' => 'nullable|image',
             'scan_kk' => 'nullable|image',
             'scan_ktp_ayah' => 'nullable|image',
             'scan_ktp_ibu' => 'nullable|image'
         ]);
+
+        
 
         // Cek apakah santri dengan nama & tanggal lahir sudah ada
         if (Santri::where('nama_lengkap', $request->nama_lengkap)
@@ -91,7 +96,8 @@ class UserController extends Controller
             'status_ayah' => $request->status_ayah,
             'status_ibu' => $request->status_ibu,
             'alamat_orang_tua' => $request->alamat_orang_tua,
-            'nomor_hp_orang_tua' => $request->nomor_hp_orang_tua
+            'nomor_hp_orang_tua' => $request->nomor_hp_orang_tua,
+            'email_orang_tua'   => $request->email_orang_tua
         ]);
 
         // Simpan data wali jika ada
@@ -104,7 +110,9 @@ class UserController extends Controller
                     'pekerjaan_wali' => $request->pekerjaan_wali,
                     'penghasilan_wali' => $request->penghasilan_wali,
                     'alamat_wali' => $request->alamat_wali,
-                    'nomor_hp_wali' => $request->nomor_hp_wali
+                    'nomor_hp_wali' => $request->nomor_hp_wali,
+                    'email_wali'   => $request->email_wali
+
                 ]
             );
         }

@@ -197,7 +197,12 @@
                     <i class="fas fa-users text-2xl text-green-600 mr-3"></i>
                     <h3 class="text-xl font-semibold">Data Orang Tua</h3>
                 </div>
+                <p class="italic text-red-500"> <span class="font-extrabold">NB :</span> kami menghubungi anda melalui email, Harap isi dengan teliti</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex flex-col">
+                            <label for="email_orang_tua" class="mb-2">Email Orang Tua</label>
+                            <input type="email" name="email_orang_tua" id="email_orang_tua" class="border p-2 rounded-lg" placeholder="Email Orang Tua" required>
+                        </div>
                         <div class="flex flex-col">
                             <label class="mb-2">Nama Ayah</label>
                             <input type="text" class="border p-2 rounded-lg" name="nama_ayah"
@@ -345,6 +350,13 @@
                             <textarea name="alamat_wali" class="border p-2 rounded-lg"
                                 placeholder="Masukkan alamat wali">{{ old('alamat_wali') }}</textarea>
                             @error('alamat_wali')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
+                        </div>
+
+
+                        {{-- Email Wali --}}
+                        <div class="flex flex-col">
+                            <label for="email_wali" class="mb-2">Email Wali</label>
+                            <input type="email" name="email_wali" id="email_wali" class="border p-2 rounded-lg" placeholder="Email Wali" >
                         </div>
 
                         <!-- Nomor HP Wali -->

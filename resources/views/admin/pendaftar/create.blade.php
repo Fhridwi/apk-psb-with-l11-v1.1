@@ -241,6 +241,18 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+                                <div class="col-md-6">
+                                    <label for="email_orang_tua" class="form-label">Email Orang Tua</label>
+                                    <input type="email" name="email_orang_tua"
+                                        class="form-control @error('email_orang_tua') is-invalid @enderror"
+                                        value="{{ old('email_orang_tua') }}" required>
+                                    @error('email_orang_tua')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                
+
                                 <div class="col-md-6">
                                     <label for="nomor_hp_orang_tua" class="form-label">No HP Orang Tua</label>
                                     <input type="text" name="nomor_hp_orang_tua" value="{{ old('nomor_hp_orang_tua') }}"

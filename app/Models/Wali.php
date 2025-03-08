@@ -17,6 +17,7 @@ class Wali extends Model
         'penghasilan_wali',
         'alamat_wali',
         'nomor_hp_wali',
+        'email_wali',
     ];
 
     public function santri()
