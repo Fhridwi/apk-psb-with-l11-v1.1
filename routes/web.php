@@ -8,6 +8,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Wali\StatusController;
 use App\Http\Controllers\Wali\WaliController;
 use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
@@ -22,13 +23,14 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login');
 });
 
+
+// Route Umum
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/data-CalonSantri/{id}/export-add', [CalonSantriController::class, 'exportPDF'])->name('bukti.psb');
 
 //Route Admin
 Route::prefix('/admin')->middleware(['auth',  'role:admin'])->group(function () {
-    
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin');
-    
     //Tahun Ajaran
     Route::get('/tahun-ajaran', [TahunAjaranController::class, 'index'])->name('tahun.index');
     Route::get('/tambah-tahun-ajaran', [TahunAjaranController::class, 'create'])->name('tahun.create');
@@ -67,7 +69,6 @@ Route::prefix('/admin')->middleware(['auth',  'role:admin'])->group(function () 
     Route::delete('/data-CalonSantri/{id}', [CalonSantriController::class, 'destroy'])->name('CalonSantri.delete');
     //export xls
     Route::get('/santri/export', [CalonSantriController::class, 'exportSantri'])->name('santri.export');
-    Route::get('/data-CalonSantri/{id}/export-add', [CalonSantriController::class, 'exportPDF'])->name('bukti.psb');
 
    
 
@@ -85,4 +86,6 @@ Route::prefix('20192506')->middleware(['auth', 'role:wali'])->group(function() {
     Route::get('/daftar', [WaliController::class, 'create'])->name('daftar.create');
     Route::post('/daftar', [WaliController::class, 'store'])->name('daftar.store');
     Route::get('/daftar-show/{id}', [WaliController::class, 'show'])->name('daftar.show');
+    //Status Pendaftaran
+    Route::get('/status',[StatusController::class, 'index'])->name('status.index');
 });

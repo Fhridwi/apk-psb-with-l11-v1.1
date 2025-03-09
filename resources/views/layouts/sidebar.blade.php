@@ -87,8 +87,8 @@
                             <span>Daftar Santri</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ request()->is('20192506/status-pendaftaran') ? 'active' : '' }}">
-                        <a href="#" class="sidebar-link">
+                    <li class="sidebar-item {{ request()->is('20192506/status') ? 'active' : '' }}">
+                        <a href="{{ route('status.index') }}" class="sidebar-link">
                             <i class="bi bi-clipboard-check"></i>
                             <span>Status Pendaftaran</span>
                         </a>

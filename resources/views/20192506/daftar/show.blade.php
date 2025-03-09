@@ -7,28 +7,6 @@
     <div class="card-header bg-primary text-white">
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="mb-0 text-white">Detail Santri</h5>
-            <div>
-                <!-- Tombol Export PDF -->
-                <a href="#" class="btn btn-danger btn-sm">
-                    <i class="fas fa-file-pdf"></i> Export PDF
-                </a>
-                <!-- Tombol Export Excel -->
-                <a href="#" class="btn btn-success btn-sm">
-                    <i class="fas fa-file-excel"></i> Export Excel
-                </a>
-                <!-- Dropdown Verifikasi -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-info text-white btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-check-circle"></i> Verifikasi
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item update-status" href="#" data-id="{{ $santri->id }}" data-status="Pending">🟡 Pending</a></li>
-                        <li><a class="dropdown-item update-status" href="#" data-id="{{ $santri->id }}" data-status="Memverifikasi">🔵 Memverifikasi</a></li>
-                        <li><a class="dropdown-item update-status" href="#" data-id="{{ $santri->id }}" data-status="Diterima">🟢 Diterima</a></li>
-                        <li><a class="dropdown-item update-status" href="#" data-id="{{ $santri->id }}" data-status="Ditolak">🔴 Ditolak</a></li>
-                    </ul>
-                </div>                
-            </div>
         </div>
     </div>
     
@@ -101,6 +79,7 @@
                 </table>
             </div>
         </div>
+    </div>
 
         <div class="row">
             <!-- Data Orang Tua -->
@@ -304,7 +283,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+
     </div>
 </div>
 
