@@ -12,6 +12,7 @@ use App\Models\Sekolah;
 use App\Models\TahunAjaran;
 use App\Models\Wali;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WaliController extends Controller
 {
@@ -34,6 +35,9 @@ class WaliController extends Controller
 
     public function store(Request $request)
     {
+
+
+
         $request->validate([
             'nama_lengkap' => 'required|string|max:100',
             'tempat_lahir' => 'required|string|max:100',
@@ -114,6 +118,7 @@ class WaliController extends Controller
     
         // Simpan data santri
         $santri = Santri::create([
+            'akun_id' => Auth::user()->id,
             'no_pendaftaran' => $request->no_pendaftaran,
             'nama_lengkap' => $request->nama_lengkap,
             'tempat_lahir' => $request->tempat_lahir,
@@ -127,7 +132,6 @@ class WaliController extends Controller
             'orang_tua_id' => $orangTua->id,
             'wali_id' => $wali ? $wali->id : null,
             'dokumen_santri_id' => $dokumen->id,
-            'users_id' => ()->id(), 
         ]);
         
     
@@ -142,6 +146,13 @@ class WaliController extends Controller
        //  Mail::to($request->email_orang_tua)->send(new BuktiPendaftaranMail($santri, $pdfFileName));
     
         return redirect()->route('wali.dashboard')->with('success', 'Pendaftaran berhasil disimpan!');
+    }
+
+    public function show(string $id)
+    {
+        $santri = Santri::with(['Wali', 'OrangTua', 'programSekolah', 'DokumenSantri'])->findOrFail($id);
+    
+        return view('20192506.daftar.show', compact('santri'));
     }
 
     

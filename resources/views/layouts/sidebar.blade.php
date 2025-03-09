@@ -81,7 +81,7 @@
                     </li>
 
                     <li class="sidebar-title">Pendaftaran</li>
-                    <li class="sidebar-item {{ request()->is('20192506/daftar') ? 'active' : '' }}">
+                    <li class="sidebar-item {{ request()->is('20192506/daftar', '20192506/daftar-show/*' ) ? 'active' : '' }}">
                         <a href="{{ route('daftar.create') }}" class="sidebar-link">
                             <i class="bi bi-pencil-square"></i>
                             <span>Daftar Santri</span>

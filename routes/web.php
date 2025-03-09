@@ -84,4 +84,5 @@ Route::prefix('20192506')->middleware(['auth', 'role:wali'])->group(function() {
     //daftar santri
     Route::get('/daftar', [WaliController::class, 'create'])->name('daftar.create');
     Route::post('/daftar', [WaliController::class, 'store'])->name('daftar.store');
+    Route::get('/daftar-show/{id}', [WaliController::class, 'show'])->name('daftar.show');
 });
