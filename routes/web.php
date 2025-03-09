@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalonSantriController;
 use App\Http\Controllers\DashboardController;
@@ -69,7 +70,13 @@ Route::prefix('/admin')->middleware(['auth',  'role:admin'])->group(function () 
     Route::delete('/data-CalonSantri/{id}', [CalonSantriController::class, 'destroy'])->name('CalonSantri.delete');
     //export xls
     Route::get('/santri/export', [CalonSantriController::class, 'exportSantri'])->name('santri.export');
-
+    //Menejemnt Akun
+    Route::get('/setting/akun', [AkunController::class, 'index'])->name('akun.index');
+    Route::get('/setting/akun-create', [AkunController::class, 'create'])->name('akun.create');
+    Route::post('/setting/akun-create', [AkunController::class, 'store'])->name('akun.store');
+    Route::get('/setting/akun/{id}/edit', [AkunController::class, 'edit'])->name('akun.edit');
+    Route::put('/setting/akun/{id}/update', [AkunController::class, 'update'])->name('akun.update');
+    Route::delete('/setting/akun/{id}/delete', [AkunController::class, 'destroy'])->name('akun.delete');
    
 
 

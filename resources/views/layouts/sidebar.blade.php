@@ -31,46 +31,59 @@
                 <li class="sidebar-title">Menu</li>
 
                 @if(auth()->user()->role === 'admin')
-                    <li class="sidebar-item {{ request()->is('admin') ? 'active' : '' }}">
-                        <a href="{{ route('admin') }}" class="sidebar-link">
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item {{ request()->is('admin') ? 'active' : '' }}">
+                    <a href="{{ route('admin') }}" class="sidebar-link">
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
-                    <li class="sidebar-title">Sekolah & Program</li>
-                    <li class="sidebar-item {{ request()->is('admin/tahun-ajaran*') ? 'active' : '' }}">
-                        <a href="{{ route('tahun.index') }}" class="sidebar-link">
-                            <i class="bi bi-calendar-check-fill"></i>
-                            <span>Tahun Ajaran</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item {{ request()->is('admin/data-sekolah*') ? 'active' : '' }}">
-                        <a href="{{ route('sekolah.index') }}" class="sidebar-link">
-                            <i class="bi bi-building-fill"></i>
-                            <span>Sekolah</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item {{ request()->is('admin/data-program*') ? 'active' : '' }}">
-                        <a href="{{ route('program.index') }}" class="sidebar-link">
-                            <i class="bi bi-person-gear"></i>
-                            <span>Program</span>
-                        </a>
-                    </li>
+                <li class="sidebar-title">Sekolah & Program</li>
+                <li class="sidebar-item has-sub">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-mortarboard-fill"></i>
+                        <span>Manajemen Sekolah</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item {{ request()->is('admin/tahun-ajaran*') ? 'active' : '' }}">
+                            <a href="{{ route('tahun.index') }}">Tahun Ajaran</a>
+                        </li>
+                        <li class="submenu-item {{ request()->is('admin/data-sekolah*') ? 'active' : '' }}">
+                            <a href="{{ route('sekolah.index') }}">Sekolah</a>
+                        </li>
+                        <li class="submenu-item {{ request()->is('admin/data-program*') ? 'active' : '' }}">
+                            <a href="{{ route('program.index') }}">Program</a>
+                        </li>
+                    </ul>
+                </li>
 
-                    <li class="sidebar-title">Pendaftaran</li>
-                    <li class="sidebar-item {{ request()->is('admin/data-CalonSantri*') ? 'active' : '' }}">
-                        <a href="{{ route('CalonSantri.index') }}" class="sidebar-link">
-                            <i class="bi bi-person-check-fill"></i>
-                            <span>Calon Santri</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item {{ request()->is('admin/data-pendaftar*') ? 'active' : '' }}">
-                        <a href="{{ route('pendaftar.index') }}" class="sidebar-link">
-                            <i class="bi bi-list-check"></i>
-                            <span>Data Pendaftar</span>
-                        </a>
-                    </li>
+                <li class="sidebar-title">Pendaftaran</li>
+                <li class="sidebar-item {{ request()->is('admin/data-CalonSantri*') ? 'active' : '' }}">
+                    <a href="{{ route('CalonSantri.index') }}" class="sidebar-link">
+                        <i class="bi bi-person-check-fill"></i>
+                        <span>Calon Santri</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->is('admin/data-pendaftar*') ? 'active' : '' }}">
+                    <a href="{{ route('pendaftar.index') }}" class="sidebar-link">
+                        <i class="bi bi-list-check"></i>
+                        <span>Data Pendaftar</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-title">Manajemen Akun</li>
+                <li class="sidebar-item {{ request()->is('admin/setting/akun', 'admin/setting/akun-create') ? 'active' : '' }}">
+                    <a href="{{ route('akun.index') }}" class="sidebar-link">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Manajemen Akun</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ request()->is('admin/setting') ? 'active' : '' }}">
+                    <a href="" class="sidebar-link">
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Pengaturan</span>
+                    </a>
+                </li>
 
                 @elseif(auth()->user()->role === 'wali')
                     <li class="sidebar-item {{ request()->is('20192506/dashboard') ? 'active' : '' }}">
@@ -81,13 +94,13 @@
                     </li>
 
                     <li class="sidebar-title">Pendaftaran</li>
-                    <li class="sidebar-item {{ request()->is('20192506/daftar', '20192506/daftar-show/*' ) ? 'active' : '' }}">
+                    <li class="sidebar-item {{ request()->is('20192506/daftar') ? 'active' : '' }}">
                         <a href="{{ route('daftar.create') }}" class="sidebar-link">
                             <i class="bi bi-pencil-square"></i>
                             <span>Daftar Santri</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ request()->is('20192506/status') ? 'active' : '' }}">
+                    <li class="sidebar-item {{ request()->is('20192506/status-pendaftaran') ? 'active' : '' }}">
                         <a href="{{ route('status.index') }}" class="sidebar-link">
                             <i class="bi bi-clipboard-check"></i>
                             <span>Status Pendaftaran</span>
