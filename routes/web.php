@@ -4,20 +4,25 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CalonSantriController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TahunAjaranController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\Wali\StatusController;
-use App\Http\Controllers\Wali\WaliController;
-use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Route;
 
+
+//Route Bebass
 
 Route::get('/', function() {
   return view('home');
 });
+
+Route::get('/daftar-santri', [GuestController::class, 'index'])->name('pendaftaran.index');
+Route::post('/daftar-santri-submit', [GuestController::class, 'store'])->name('pendaftaran.store');
+Route::get('/success-pendaftaran', [GuestController::class, 'success'])->name('pendaftaran.success');
+
+
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -85,14 +90,13 @@ Route::prefix('/admin')->middleware(['auth',  'role:admin'])->group(function () 
 
 
 
-// Route Wali 
-Route::prefix('20192506')->middleware(['auth', 'role:wali'])->group(function() {
-    Route::get('/dashboard', [WaliController::class, 'index'])->name('wali.dashboard');
+// // Route Wali 
+// Route::prefix('20192506')->middleware(['auth', 'role:wali'])->group(function() {
+//     Route::get('/dashboard', [WaliController::class, 'index'])->name('wali.dashboard');
 
-    //daftar santri
-    Route::get('/daftar', [WaliController::class, 'create'])->name('daftar.create');
-    Route::post('/daftar', [WaliController::class, 'store'])->name('daftar.store');
-    Route::get('/daftar-show/{id}', [WaliController::class, 'show'])->name('daftar.show');
-    //Status Pendaftaran
-    Route::get('/status',[StatusController::class, 'index'])->name('status.index');
-});
+//     //daftar santri
+//     Route::get('/daftar', [WaliController::class, 'create'])->name('daftar.create');
+//     Route::post('/daftar', [WaliController::class, 'store'])->name('daftar.store');
+//     Route::get('/daftar-show/{id}', [WaliController::class, 'show'])->name('daftar.show');
+//     //Status Pendaftaran
+// });

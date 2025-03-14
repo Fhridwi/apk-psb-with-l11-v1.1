@@ -1,12 +1,14 @@
 @component('mail::message')
 # Bukti Pendaftaran Santri
 
-Halo {{ $santri->nama_lengkap }},
+Assalamu'alaikum Wr. Wb.
 
-Terima kasih telah mendaftar di pondok pesantren kami. Terlampir bukti pendaftaran dalam bentuk PDF.
+Berikut ini adalah bukti pendaftaran santri yang telah diterima oleh sistem kami.
 
-Jika ada pertanyaan, silakan hubungi kami.
+@component('mail::button', ['url' => 'https://pondokmu.sch.id'])
+Kunjungi Website
+@endcomponent
 
-Terima kasih,<br>
+Jazakumullahu Khairan,<br>
 {{ config('app.name') }}
 @endcomponent

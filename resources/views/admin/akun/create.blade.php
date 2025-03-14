@@ -72,6 +72,7 @@
                                                 name="role" required>
                                                 <option value="wali" {{ old('role') == 'wali' ? 'selected' : '' }}>Wali</option>
                                                 <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                                <option value="pengasuh" {{ old('role') == 'pengasuh' ? 'selected' : '' }}>Pengasuh</option>
                                             </select>
                                             @error('role')
                                                 <span class="text-danger">{{ $message }}</span>

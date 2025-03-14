@@ -18,8 +18,8 @@ class LoginController extends Controller
     {
         // Validasi input login
         $request->validate([
-            'email' => 'required|email:dns', 
-            'password' => 'required|min:6|max:32' 
+            'email' => 'required|email:dns',
+            'password' => 'required|min:6|max:32'
         ], [
             'email.required' => 'Email wajib diisi!',
             'email.email' => 'Format email tidak valid!',
@@ -33,19 +33,19 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             session()->flash('success', 'Selamat datang, ' . Auth::user()->name);
-        
+
             // Arahkan berdasarkan role pengguna
             switch (Auth::user()->role) {
                 case 'admin':
                     return redirect()->intended('/admin/dashboard');
-                case 'wali':
-                    return redirect()->intended('/20192506/dashboard');
+                case 'pengasuh':
+                    return redirect()->intended('/pengasuh/dashboard');
                 default:
                     Auth::logout();
                     return redirect()->route('login')->with('error', 'Role tidak dikenali.');
             }
         }
-        
+
 
         // Jika gagal, tampilkan error
         session()->flash('error', 'Email atau password salah.');

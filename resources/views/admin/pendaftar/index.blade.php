@@ -44,6 +44,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Email Aktif</th>
                                     <th>Nomor Registrasi</th>
                                     <th>Nama Lengkap</th>
                                     <th>Tempat Lahir</th>
@@ -57,6 +58,7 @@
                                 @forelse ($santri as $s)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $s->email }}</td>
                                     <td>{{ $s->no_pendaftaran }}</td>
                                     <td>{{ $s->nama_lengkap }}</td>
                                     <td>{{ $s->tempat_lahir }}</td>

@@ -50,6 +50,10 @@
                         <td>{{ $santri->no_pendaftaran }}</td>
                     </tr>
                     <tr>
+                        <th>Email Aktif</th>
+                        <td>{{ $santri->email }}</td>
+                    </tr>
+                    <tr>
                         <th>Nama Lengkap</th>
                         <td>{{ $santri->nama_lengkap }}</td>
                     </tr>

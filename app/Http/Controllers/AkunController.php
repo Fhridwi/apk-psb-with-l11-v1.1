@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class AkunController extends Controller
 {
     public function index() {
-        $users = User::whereIn('role', ['admin', 'wali'])->get();
+        $users = User::whereIn('role', ['admin', 'wali', 'pengasuh'])->get();
         return view('admin.akun.index', compact('users'));
     }
 
@@ -22,7 +22,7 @@ class AkunController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|in:admin,wali',
+            'role' => 'required|in:admin,wali,pengasuh',
         ]);
 
         User::create([
@@ -42,25 +42,46 @@ class AkunController extends Controller
 }
 
 
-    public function update(Request $request, User $user) {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'role' => 'required|in:admin,wali',
-        ]);
+public function update(Request $request, User $user)
+{
+    $rules = [
+        'name' => 'required|string|max:255',
+        'role' => 'required|in:admin,wali,pengasuh',
+    ];
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-        ]);
-
-        if ($request->password) {
-            $user->update(['password' => Hash::make($request->password)]);
-        }
-
-        return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui!');
+    // Validasi email hanya jika diubah
+    if ($request->email !== $user->email) {
+        $rules['email'] = 'required|email|unique:users,email';
     }
+
+    $request->validate($rules);
+
+    $data = [];
+
+    if ($request->name !== $user->name) {
+        $data['name'] = $request->name;
+    }
+
+    if ($request->email !== $user->email) {
+        $data['email'] = $request->email;
+    }
+
+    if ($request->role !== $user->role) {
+        $data['role'] = $request->role;
+    }
+
+    if ($request->password) {
+        $data['password'] = Hash::make($request->password);
+    }
+
+    if (!empty($data)) {
+        $user->update($data);
+    }
+
+    return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui!');
+}
+
+
 
     public function destroy($id)
 {

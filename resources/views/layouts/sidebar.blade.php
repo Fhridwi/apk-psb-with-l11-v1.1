@@ -31,18 +31,18 @@
                 <li class="sidebar-title">Menu</li>
 
                 @if(auth()->user()->role === 'admin')
-                <li class="sidebar-item {{ request()->is('admin') ? 'active' : '' }}">
+                <li class="sidebar-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                     <a href="{{ route('admin') }}" class="sidebar-link">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-title">Sekolah & Program</li>
+                <li class="sidebar-title">Data Master</li>
                 <li class="sidebar-item has-sub">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-mortarboard-fill"></i>
-                        <span>Manajemen Sekolah</span>
+                        <span>Manajemen Sekolah </span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item {{ request()->is('admin/tahun-ajaran*') ? 'active' : '' }}">

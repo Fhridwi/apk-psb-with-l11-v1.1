@@ -1,9 +1,3 @@
-@extends('layouts.app')
-
-@section('title', 'Tambah Pendaftar')
-
-@section('content')
-
     <section class="section">
         <div class="row">
             <div class="col-12">
@@ -12,9 +6,9 @@
                         <h4 class="card-title">Form Pendaftaran Santri</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('pendaftar.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-
+                            
                             {{-- Email --}}
                             <h5 class="mt-3">Email Aktif</h5>
                             <div class="row">
@@ -434,4 +428,3 @@
             toggleFields();
         });
     </script>
-@endsection

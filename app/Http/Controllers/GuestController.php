@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Wali;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Mail\BuktiPendaftaranMail;
 use App\Models\DokumenSantri;
 use App\Models\OrangTua;
 use App\Models\Program;
@@ -11,16 +11,18 @@ use App\Models\Santri;
 use App\Models\Sekolah;
 use App\Models\TahunAjaran;
 use App\Models\Wali;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
-class WaliController extends Controller
+
+class GuestController extends Controller
 {
-    public function index() {
-        return view('.dashboard');
-    }
-
-    public function create()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
         $programs = Program::all();
         $tahunAjaran = TahunAjaran::where('status', 'dibuka')->get();
@@ -28,16 +30,24 @@ class WaliController extends Controller
          // Generate No Pendaftaran M]
          $year = date('Y'); 
          $randomNumber = mt_rand(10000, 99999); 
-         $no_pendaftaran = 'PSB-' . $year . $randomNumber;
+         $no_pendaftaran = 'PCN' . $year . $randomNumber;
 
-        return view('20192506.daftar.create', compact('programs', 'sekolahs', 'no_pendaftaran', 'tahunAjaran'));
+        return view('guest.daftar.daftar', compact('programs', 'sekolahs', 'no_pendaftaran', 'tahunAjaran'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function success()
+    {
+        return view('guest.daftar.success', );
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-
-
-
         $request->validate([
             'nama_lengkap' => 'required|string|max:100',
             'tempat_lahir' => 'required|string|max:100',
@@ -58,7 +68,6 @@ class WaliController extends Controller
             'status_ibu' => 'required|string',
             'alamat_orang_tua' => 'required|string',
             'nomor_hp_orang_tua' => 'required|string',
-            'email_orang_tua' => 'required|email',
             'scan_foto' => 'nullable|image',
             'scan_kk' => 'nullable|image',
             'scan_ktp_ayah' => 'nullable|image',
@@ -83,7 +92,6 @@ class WaliController extends Controller
             'status_ibu' => $request->status_ibu,
             'alamat_orang_tua' => $request->alamat_orang_tua,
             'nomor_hp_orang_tua' => $request->nomor_hp_orang_tua,
-            'email_orang_tua' => $request->email_orang_tua
         ]);
     
         $wali = null;
@@ -96,7 +104,6 @@ class WaliController extends Controller
                     'penghasilan_wali' => $request->penghasilan_wali,
                     'alamat_wali' => $request->alamat_wali,
                     'nomor_hp_wali' => $request->nomor_hp_wali,
-                    'email_wali' => $request->email_wali
                 ]
             );
         }
@@ -118,9 +125,9 @@ class WaliController extends Controller
     
         // Simpan data santri
         $santri = Santri::create([
-            'akun_id' => Auth::user()->id,
             'no_pendaftaran' => $request->no_pendaftaran,
             'nama_lengkap' => $request->nama_lengkap,
+            'email'     => $request->email,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -131,29 +138,54 @@ class WaliController extends Controller
             'tahun_id'  => $request->tahun_ajaran,
             'orang_tua_id' => $orangTua->id,
             'wali_id' => $wali ? $wali->id : null,
-            'dokumen_santri_id' => $dokumen->id,
+            'dokumen_santri_id' => $dokumen->id
         ]);
+    
+        $tahun = TahunAjaran::where('status', 'dibuka')->first(); 
+
+        // Generate PDF
+        $pdf = Pdf::loadView('admin.calonSantri.bukti', compact('santri', 'tahun'));
         
+        // Simpan file di storage
+        $pdfFileName = 'bukti_pendaftaran_' . $santri->id . '.pdf';
+        $pdfPath = 'public/' . $pdfFileName;
+        Storage::put($pdfPath, $pdf->output());
+        
+        // Kirim email dengan PDF
+        Mail::to($request->email)->send(new BuktiPendaftaranMail($santri, Storage::path($pdfPath)));
     
-       //  $tahun = TahunAjaran::where('status', 'dibuka')->first(); 
-       //  // Generate PDF
-       //  $pdf = PDF::loadView('admin.calonSantri.bukti', compact('santri', 'tahun'));
-       //  $pdfFileName = 'bukti_pendaftaran_' . $santri->id . '.pdf';
-       //  $pdfPath = storage_path('app/public/' . $pdfFileName);
-       //  $pdf->save($pdfPath);
-    
-       //  // Kirim email dengan lampiran PDF
-       //  Mail::to($request->email_orang_tua)->send(new BuktiPendaftaranMail($santri, $pdfFileName));
-    
-        return redirect()->route('wali.dashboard')->with('success', 'Pendaftaran berhasil disimpan!');
+        return redirect()->route('pendaftaran.success')->with('success', 'Pendaftaran berhasil disimpan!');
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show(string $id)
     {
-        $santri = Santri::with(['Wali', 'OrangTua', 'programSekolah', 'DokumenSantri'])->findOrFail($id);
-    
-        return view('20192506.daftar.show', compact('santri'));
+        //
     }
 
-    
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }

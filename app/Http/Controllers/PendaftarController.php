@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BuktiPendaftaranMail;
+use Illuminate\Support\Facades\Storage;
 
 class PendaftarController extends Controller
 {
@@ -51,7 +52,7 @@ class PendaftarController extends Controller
          // Generate No Pendaftaran M]
          $year = date('Y'); 
          $randomNumber = mt_rand(10000, 99999); 
-         $no_pendaftaran = 'PSB-' . $year . $randomNumber;
+         $no_pendaftaran = 'PCN' . $year . $randomNumber;
 
         return view('admin.pendaftar.create', compact('programs', 'sekolahs', 'no_pendaftaran', 'tahunAjaran'));
     }
@@ -63,6 +64,7 @@ class PendaftarController extends Controller
      public function store(Request $request)
      {
          $request->validate([
+             'email' => 'required|email|unique:email,email',
              'nama_lengkap' => 'required|string|max:100',
              'tempat_lahir' => 'required|string|max:100',
              'tanggal_lahir' => 'required|date',
@@ -82,7 +84,6 @@ class PendaftarController extends Controller
              'status_ibu' => 'required|string',
              'alamat_orang_tua' => 'required|string',
              'nomor_hp_orang_tua' => 'required|string',
-             'email_orang_tua' => 'required|email',
              'scan_foto' => 'nullable|image',
              'scan_kk' => 'nullable|image',
              'scan_ktp_ayah' => 'nullable|image',
@@ -107,7 +108,6 @@ class PendaftarController extends Controller
              'status_ibu' => $request->status_ibu,
              'alamat_orang_tua' => $request->alamat_orang_tua,
              'nomor_hp_orang_tua' => $request->nomor_hp_orang_tua,
-             'email_orang_tua' => $request->email_orang_tua
          ]);
      
          $wali = null;
@@ -120,19 +120,19 @@ class PendaftarController extends Controller
                      'penghasilan_wali' => $request->penghasilan_wali,
                      'alamat_wali' => $request->alamat_wali,
                      'nomor_hp_wali' => $request->nomor_hp_wali,
-                     'email_wali' => $request->email_wali
                  ]
              );
          }
      
          $dokumen = DokumenSantri::updateOrCreate(
             [
-                'scan_foto' => $request->hasFile('scan_foto') ? $request->file('scan_foto')->store('dokumen', 'public') : null,
-                'scan_kk' => $request->hasFile('scan_kk') ? $request->file('scan_kk')->store('dokumen', 'public') : null,
-                'scan_ktp_ayah' => $request->hasFile('scan_ktp_ayah') ? $request->file('scan_ktp_ayah')->store('dokumen', 'public') : null,
-                'scan_ktp_ibu' => $request->hasFile('scan_ktp_ibu') ? $request->file('scan_ktp_ibu')->store('dokumen', 'public') : null,
+                'scan_foto' => $request->hasFile('scan_foto') ? $request->file('scan_foto')->store('dokumen', 'public') : $dokumen->scan_foto ?? null,
+                'scan_kk' => $request->hasFile('scan_kk') ? $request->file('scan_kk')->store('dokumen', 'public') : $dokumen->scan_kk ?? null,
+                'scan_ktp_ayah' => $request->hasFile('scan_ktp_ayah') ? $request->file('scan_ktp_ayah')->store('dokumen', 'public') : $dokumen->scan_ktp_ayah ?? null,
+                'scan_ktp_ibu' => $request->hasFile('scan_ktp_ibu') ? $request->file('scan_ktp_ibu')->store('dokumen', 'public') : $dokumen->scan_ktp_ibu ?? null,
             ]
         );
+        
         
      
          $programSekolah = ProgramSekolah::firstOrCreate([
@@ -202,25 +202,50 @@ class PendaftarController extends Controller
      * Remove the specified resource from storage.
      */
     
-    public function destroy($id)
-    {
-        DB::transaction(function () use ($id) {
-            $santri = Santri::findOrFail($id);
-    
-            $santri->dokumenSantri()?->delete();
-    
-            if ($santri->orang_tua_id && !Santri::where('orang_tua_id', $santri->orang_tua_id)->where('id', '!=', $santri->id)->exists()) {
-                $santri->orangTua()?->delete();
-            }
-    
-            if ($santri->wali_id && !Santri::where('wali_id', $santri->wali_id)->where('id', '!=', $santri->id)->exists()) {
-                $santri->wali()?->delete();
-            }
-    
-            $santri->delete();
-        });
-    
-        return redirect()->route('pendaftar.index')->with('success', 'Santri berhasil dihapus.');
-    }
+     public function destroy($id)
+     {
+         DB::transaction(function () use ($id) {
+             $santri = Santri::findOrFail($id);
+     
+             // Pastikan relasi dokumenSantri ada sebelum mengaksesnya
+             if ($santri->dokumenSantri()->exists()) {
+                 $dokumen = $santri->dokumenSantri;
+     
+                 // Hapus file yang tersimpan di storage
+                 if ($dokumen->scan_foto && Storage::exists('public/' . $dokumen->scan_foto)) {
+                     Storage::delete('public/' . $dokumen->scan_foto);
+                 }
+                 if ($dokumen->scan_kk && Storage::exists('public/' . $dokumen->scan_kk)) {
+                     Storage::delete('public/' . $dokumen->scan_kk);
+                 }
+                 if ($dokumen->scan_ktp_ayah && Storage::exists('public/' . $dokumen->scan_ktp_ayah)) {
+                     Storage::delete('public/' . $dokumen->scan_ktp_ayah);
+                 }
+                 if ($dokumen->scan_ktp_ibu && Storage::exists('public/' . $dokumen->scan_ktp_ibu)) {
+                     Storage::delete('public/' . $dokumen->scan_ktp_ibu);
+                 }
+     
+                 // Hapus data dokumen dari database
+                 $dokumen->delete();
+             }
+     
+             // Hapus Orang Tua jika tidak ada santri lain yang terkait
+             if ($santri->orang_tua_id && !Santri::where('orang_tua_id', $santri->orang_tua_id)->where('id', '!=', $santri->id)->exists()) {
+                 $santri->orangTua()?->delete();
+             }
+     
+             // Hapus Wali jika tidak ada santri lain yang terkait
+             if ($santri->wali_id && !Santri::where('wali_id', $santri->wali_id)->where('id', '!=', $santri->id)->exists()) {
+                 $santri->wali()?->delete();
+             }
+     
+             // Hapus data santri
+             $santri->delete();
+         });
+     
+         return redirect()->route('pendaftar.index')->with('success', 'Santri berhasil dihapus.');
+     }
+     
+     
     
 }
