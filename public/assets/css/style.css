@@ -1,0 +1,945 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: "Raleway", sans-serif;
+}
+
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+}
+
+a,
+a:focus,
+a:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Raleway", sans-serif;
+}
+
+/*===================================
+			Margin & Padding
+===================================*/
+
+.padding-top-0 {
+    padding-top: 0px !important;
+}
+.padding-top-10 {
+    padding-top: 10px !important;
+}
+.padding-top-20 {
+    padding-top: 20px !important;
+}
+.padding-top-30 {
+    padding-top: 30px !important;
+}
+.padding-top-50 {
+    padding-top: 50px !important;
+}
+.padding-top-80 {
+    padding-top: 80px !important;
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0px !important;
+}
+.padding-bottom-10 {
+    padding-bottom: 10px !important;
+}
+.padding-bottom-20 {
+    padding-bottom: 20px !important;
+}
+.padding-bottom-30 {
+    padding-bottom: 30px !important;
+}
+.padding-bottom-50 {
+    padding-bottom: 50px !important;
+}
+.padding-bottom-80 {
+    padding-bottom: 80px !important;
+}
+
+.margin-top-0 {
+    margin-top: 0px !important;
+}
+.margin-top-10 {
+    margin-top: 10px !important;
+}
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+.margin-top-30 {
+    margin-top: 30px !important;
+}
+.margin-top-50 {
+    margin-top: 50px !important;
+}
+.margin-top-80 {
+    margin-top: 80px !important;
+}
+.margin-top-100 {
+    margin-top: 100px !important;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0px !important;
+}
+.margin-bottom-10 {
+    margin-bottom: 10px !important;
+}
+.margin-bottom-20 {
+    margin-bottom: 20px !important;
+}
+.margin-bottom-30 {
+    margin-bottom: 30px !important;
+}
+.margin-bottom-50 {
+    margin-bottom: 50px !important;
+}
+.margin-bottom-80 {
+    margin-bottom: 80px !important;
+}
+.margin-bottom-100 {
+    margin-bottom: 100px !important;
+}
+
+/*===================================
+				Navbar
+===================================*/
+
+.navbar {
+    border: 0;
+    margin-bottom: 0;
+    font-family: "Lato", sans-serif;
+    border-bottom: 3px solid #ffa500 !important; /*second-colour*/
+    font-size: 12px;
+    letter-spacing: 1px;
+    background-color: #1e5474; /*base-colour*/
+}
+
+.navbar-brand {
+    padding: 0px;
+}
+
+.navbar-brand > img {
+    height: 100%;
+    padding: 3px;
+    width: auto;
+}
+
+.navbar a {
+    color: #e0e0e0 !important;
+    opacity: 1;
+    border-bottom: 2px solid transparent !important;
+}
+
+.navbar a:hover {
+    opacity: 1;
+    color: #ffa500 !important; /*second-colour*/
+}
+
+/*.navbar-nav li .dropdown-menu { 
+	background-color: #080808;
+	color: #ffffff;
+	font-size: 12px;
+}*/
+
+.dropdown-menu li a {
+    color: #333333 !important;
+    font-size: 12px;
+}
+
+.dropdown-menu li a:hover {
+    background-color: transparent;
+}
+
+.navbar-nav li.active a {
+    color: #ffa500 !important;
+    border: none;
+    background-color: transparent !important;
+}
+
+/* Tambahkan padding ke navbar */
+.navbar {
+    padding-top: 20px; /* Padding atas */
+    padding-bottom: 20px; /* Padding bawah */
+}
+
+/* Tambahkan padding ke item menu navbar */
+.navbar-nav > li > a {
+    padding-top: 15px; /* Padding atas */
+    padding-bottom: 15px; /* Padding bawah */
+    padding-left: 20px; /* Padding kiri */
+    padding-right: 20px; /* Padding kanan */
+}
+
+/* Berikan space (margin) pada tombol login */
+.navbar-nav > li.login-btn {
+    margin-left: 20px; /* Jarak antara tombol login dan menu lainnya */
+}
+
+/* Style tambahan untuk tombol login */
+.btn.custom-btn {
+    padding: 10px 20px; /* Padding tombol */
+    border-radius: 5px; /* Membuat sudut tombol lebih rounded */
+    font-size: 14px; /* Ukuran font */
+}
+
+/* Gaya untuk layar kecil (mobile) */
+@media (max-width: 767px) {
+    .navbar-right {
+        float: right !important; /* Pastikan navbar-right tetap di kanan */
+    }
+    .login-btn .btn {
+        width: 100%; /* Tombol memenuhi lebar container */
+        margin: 5px 0; /* Beri jarak atas dan bawah */
+        text-align: center; /* Teks rata tengah */
+    }
+    .navbar-nav .login-btn {
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        margin-left: 10px;
+    }
+
+    .dropdown-menu li a {
+        color: #e0e0e0 !important;
+    }
+}
+
+/*===================================
+			   GREETING
+===================================*/
+
+.greeting h2 {
+    letter-spacing: 3px;
+}
+
+.greeting p {
+    font-size: 18px;
+}
+
+/*===================================
+			   TABLE-PESERTA
+===================================*/
+
+.table-peserta {
+    font-family: "Titillium Web", sans-serif;
+}
+
+/*===================================
+			   TABLE-JADWAL
+===================================*/
+
+.table-jadwal {
+    font-family: "Titillium Web", sans-serif;
+}
+
+/*===================================
+			   PROSEDUR
+===================================*/
+
+.prosedur p {
+    font-size: 16px;
+    padding-bottom: 10px;
+    font-family: "Titillium Web", sans-serif;
+}
+
+/*===================================
+			FORM-PENDAFTARAN
+===================================*/
+
+.form-pendaftaran {
+    font-family: "Titillium Web", sans-serif;
+}
+
+.form-pendaftaran .form-group {
+    padding: 20px 20px;
+}
+
+.form-pendaftaran .form-control {
+    border-radius: 0 !important;
+}
+
+.form-pendaftaran .btn-daftar {
+    border-radius: 0 !important;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+/*===================================
+			LOGIN-PESERTA
+===================================*/
+
+.login {
+    font-family: "Titillium Web", sans-serif;
+}
+
+.card-container.card {
+    max-width: 350px;
+    padding: 40px 40px;
+}
+
+.card {
+    background-color: #f7f7f7;
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.profile-name-card {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0 0;
+    min-height: 1em;
+}
+
+.btn.btn-signin {
+    background-color: #1e5474; /*base-colour*/
+    font-weight: 700;
+    font-size: 14px;
+    height: 36px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    -o-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -webkit-transition: all 0.218s;
+    transition: all 0.218s;
+}
+
+.btn.btn-signin:hover,
+.btn.btn-signin:active,
+.btn.btn-signin:focus {
+    background-color: #ffa500; /*second-colour*/
+}
+
+/*===================================
+			   FOOTER
+===================================*/
+
+.footer {
+    text-align: left;
+    color: #ffffff;
+    background-color: #1e5474; /*base-colour*/
+    font-family: "Titillium Web", sans-serif;
+}
+
+.footer h4 {
+    letter-spacing: 3px;
+    margin: 20px 0 15px;
+}
+
+.footer p {
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding-bottom: 5px;
+}
+
+.footer .social i {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    font-size: 15px;
+    color: #ffffff;
+    transition: 0.2s;
+    padding: 7px 8px;
+    border-radius: 50%;
+    background-color: #ffa500; /*second-colour*/
+}
+
+.footer .social .fa:hover {
+    color: #ffa500; /*second-colour*/
+    background-color: #ffffff;
+}
+
+.footer .profile i {
+    color: #ffa500; /*second-colour*/
+    font-size: 15px;
+    padding-right: 5px;
+}
+
+.footer .profile a {
+    color: #ffffff;
+}
+
+.footer hr {
+    border: 1px solid #ffa500; /*second-colour*/
+    margin-bottom: 0px;
+}
+
+.footer .copyright p {
+    color: #999999;
+    font-size: 15px;
+    letter-spacing: 3px;
+    margin: 10px 0 10px;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full layar */
+    background: url("../img/background.jpg") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+/* Overlay agar gambar lebih gelap */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Gelap 60% */
+}
+
+/* Teks di tengah */
+.hero-text {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.hero-text p {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        height: 80vh; /* Lebih pendek di HP */
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-text p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        height: 90vh;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+}
+
+/* About Section */
+.about {
+    padding: 80px 0;
+    background: #fffff;
+}
+
+.about-img img {
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Atur teks agar sejajar di tengah */
+.about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Ukuran teks */
+.about-text .section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Responsive untuk layar kecil */
+@media (max-width: 991px) {
+    .about-img {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .about-img img {
+        width: 80%;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-img img {
+        width: 100%;
+    }
+
+    .about-text .section-title {
+        font-size: 2rem;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-text .section-title {
+        font-size: 1.8rem;
+    }
+
+    .about-text p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Program Section */
+.program {
+    padding: 80px 0;
+    background: #f9f9f9;
+}
+
+.section-title {
+    margin-bottom: 40px;
+}
+
+.program-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+}
+
+.program-icon {
+    font-size: 3rem;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .program-card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .program-card {
+        padding: 15px;
+    }
+
+    .program-icon {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .program-icon {
+        font-size: 2rem;
+    }
+
+    .program-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .program-card p {
+        font-size: 1rem;
+    }
+}
+
+/* Fasilitas Section */
+.fasilitas {
+    padding: 80px 0;
+    background: #fffff;
+}
+
+.section-title {
+    margin-bottom: 40px;
+}
+
+/* Fasilitas Card */
+.fasilitas-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.fasilitas-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fasilitas-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Overlay Efek */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.fasilitas-card:hover .overlay {
+    opacity: 1;
+}
+
+.overlay h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.overlay p {
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .fasilitas-card img {
+        height: 200px;
+    }
+
+    .overlay h3 {
+        font-size: 1.3rem;
+    }
+
+    .overlay p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .fasilitas-card img {
+        height: 180px;
+    }
+
+    .overlay h3 {
+        font-size: 1.2rem;
+    }
+
+    .overlay p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .fasilitas-card img {
+        height: 160px;
+    }
+
+    .overlay h3 {
+        font-size: 1rem;
+    }
+
+    .overlay p {
+        font-size: 0.7rem;
+    }
+}
+
+/* ==================== ARTIKEL SECTION ==================== */
+.artikel {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.artikel-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.artikel-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.artikel-content {
+    padding: 20px;
+}
+
+.artikel-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.artikel-date {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.artikel-desc {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.artikel-content .btn {
+    width: 100%;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .artikel-card img {
+        height: 180px;
+    }
+
+    .artikel-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .artikel-desc {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .artikel-card img {
+        height: 160px;
+    }
+
+    .artikel-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .artikel-desc {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .artikel-card img {
+        height: 140px;
+    }
+
+    .artikel-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .artikel-desc {
+        font-size: 0.8rem;
+    }
+}
+
+.parallax-section {
+    background: url("../../assets/img/paralax.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Efek gelap transparan */
+}
+
+.parallax-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    z-index: 2;
+    position: relative;
+}
+
+.parallax-section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    z-index: 2;
+    position: relative;
+}
+
+.parallax-section .btn {
+    z-index: 2;
+    position: relative;
+}
+
+
+/* ============ FOOTER ============= */
+.footer {
+    background: url("../../assets/img/paralax.jpeg") no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    padding: 50px 0;
+    position: relative;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Overlay gelap */
+}
+
+.footer .container {
+    position: relative;
+    z-index: 2;
+}
+
+.footer a {
+    color: #f8c12c;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+.footer h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: #fff;
+    transition: 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #f8c12c;
+}
+
+.footer-contact p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer-contact i {
+    margin-right: 8px;
+    color: #f8c12c;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: #f8c12c;
+}
+
+.copyright {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+}
+
+
+

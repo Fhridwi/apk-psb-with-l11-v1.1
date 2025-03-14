@@ -19,7 +19,7 @@
     <title>Pesantren Cemerlang Annajach Putra || Bahrul Ulum </title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/img/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('img/logo.png') }}" style="height: 40px">
 
     <!-- Google fonts Raleway -->
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -33,13 +33,6 @@
     <link href="{{ asset('assets/css/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/lib/icomoon/icomoon.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
@@ -76,7 +69,7 @@
     </nav>
     <!-- /End Navigation -->
     <!-- ini buat spasi antara navbar dan greeting section -->
-    <div class="margin-bottom-100"></div>
+    <div class="margin-bottom-50"></div>
 
     <!-- Start Hero Section -->
     <section class="hero">
@@ -303,7 +296,7 @@
         <div class="container text-center">
             <h2>Menjadi Generasi Islami yang Berilmu dan Berakhlak</h2>
             <p>Bergabunglah dengan kami untuk membangun masa depan yang lebih cerah.</p>
-            <a href="psb.html" class="btn btn-primary">Daftar Sekarang</a>
+            <a href="{{ route('pendaftaran.index') }}" class="btn btn-primary">Daftar Sekarang</a>
         </div>
     </section>
     <!-- /End Parallax Section -->

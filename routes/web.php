@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
   return view('home');
-});
+})->name('home');
 
 Route::get('/daftar-santri', [GuestController::class, 'index'])->name('pendaftaran.index');
 Route::post('/daftar-santri-submit', [GuestController::class, 'store'])->name('pendaftaran.store');
